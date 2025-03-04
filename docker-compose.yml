@@ -1,0 +1,12 @@
+services:
+  db:
+    image: postgres:14.2
+    environment:
+      POSTGRES_DB: "credential"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "123"
+      TZ: UTC
+    volumes:
+      - .:/docker-entrypoint-initdb1.d
+    ports:
+      - "5433:5432"
