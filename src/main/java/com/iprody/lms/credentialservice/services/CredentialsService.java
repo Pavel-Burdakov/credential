@@ -1,6 +1,8 @@
 package com.iprody.lms.credentialservice.services;
 
+import com.iprody.lms.arrangementservice.dto.RegRequestDto;
 import com.iprody.lms.credentialservice.dto.LoginRequestDto;
+
 import com.iprody.lms.credentialservice.dto.ResponseDto;
 import com.iprody.lms.credentialservice.entity.User;
 import com.iprody.lms.credentialservice.mapper.UsersMapper;
@@ -10,6 +12,7 @@ import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
@@ -63,4 +66,12 @@ public class CredentialsService {
     repository.save(updatedUser);
 
   }
+
+  @KafkaListener(topics = "userReg", groupId = "user-events-group")
+  public void handleUserEvent(RegRequestDto userEvent) {
+    System.out.println("Received event: " + userEvent.toString());
+    repository.save(new User(userEvent.getEmail(), userEvent.getPassword(), "USER"));
+
+  }
+
 }

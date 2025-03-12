@@ -1,8 +1,9 @@
 package com.iprody.lms.credentialservice.controllers;
 
+import com.iprody.lms.arrangementservice.dto.RegRequestDto;
 import com.iprody.lms.credentialservice.dto.DelRequestDto;
 import com.iprody.lms.credentialservice.dto.LoginRequestDto;
-import com.iprody.lms.credentialservice.dto.RegRequestDto;
+
 import com.iprody.lms.credentialservice.dto.ResponseDto;
 import com.iprody.lms.credentialservice.entity.User;
 import com.iprody.lms.credentialservice.services.CredentialsService;
